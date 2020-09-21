@@ -30,7 +30,7 @@ public class LoggingUtil {
         List<File> logFiles = new ArrayList<>();
         buildLogList(logFiles, ROAD_RUNNER_FOLDER);
         //Collections.sort(logFiles, (lhs, rhs) ->
-          //      Long.compare(lhs.lastModified(), rhs.lastModified()));
+          //`   `                                               ``                        Long.compare(lhs.lastModified(), rhs.lastModified()));
 
         long dirSize = 0;
         for (File file: logFiles) {
