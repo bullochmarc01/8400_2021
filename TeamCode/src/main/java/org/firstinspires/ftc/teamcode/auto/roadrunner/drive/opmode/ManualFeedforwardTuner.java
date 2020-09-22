@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.auto.roadrunner.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.auto.roadrunner.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.auto.roadrunner.drive.RobotRR;
 
 import java.util.Objects;
 
@@ -38,7 +38,7 @@ public class ManualFeedforwardTuner extends LinearOpMode {
 
     private FtcDashboard dashboard = FtcDashboard.getInstance();
 
-    private SampleMecanumDrive drive;
+    private RobotRR drive;
 
     private static MotionProfile generateProfile(boolean movingForward) {
         MotionState start = new MotionState(movingForward ? 0 : DISTANCE, 0, 0, 0);
@@ -53,7 +53,7 @@ public class ManualFeedforwardTuner extends LinearOpMode {
     public void runOpMode() {
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
-        drive = new SampleMecanumDrive(hardwareMap);
+        drive = new RobotRR(hardwareMap);
 
         NanoClock clock = NanoClock.system();
 

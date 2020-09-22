@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.helpers;
+package org.firstinspires.ftc.teamcode.teleop;
 
 //import org.firstinspires.ftc.teamcode.helpers.IMUHelper;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,12 +7,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
-public class DriveTrainHelper {
+public class RobotTeleop {
     /* Public OpMode members. */
-    public DcMotor leftFrontMotor = null;
-    public DcMotor leftRearMotor = null;
-    public DcMotor rightFrontMotor = null;
-    public DcMotor rightRearMotor = null;
+    public DcMotor leftFront = null;
+    public DcMotor leftRear = null;
+    public DcMotor rightFront = null;
+    public DcMotor rightRear = null;
 
 
     /* Local OpMode members. */
@@ -20,7 +20,7 @@ public class DriveTrainHelper {
     private ElapsedTime period = new ElapsedTime();
 
     /* Constructor */
-    public DriveTrainHelper() {
+    public RobotTeleop() {
 
     }
 
@@ -30,23 +30,28 @@ public class DriveTrainHelper {
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftFrontMotor = hwMap.dcMotor.get("left front motor");
-        leftRearMotor = hwMap.dcMotor.get("left rear motor");
-        leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
-        leftRearMotor.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontMotor = hwMap.dcMotor.get("right front motor");
-        rightRearMotor = hwMap.dcMotor.get("right rear motor");
+        leftFront = hwMap.dcMotor.get("leftFront");
+        leftRear = hwMap.dcMotor.get("leftRear");
+
+        rightFront = hwMap.dcMotor.get("rightFront");
+        rightRear = hwMap.dcMotor.get("rightRear");
+
+        //reverse one side of the drivetrain so the robot drives straight
+
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
+        leftRear.setDirection(DcMotor.Direction.REVERSE);
 
         // Set all motors to zero power
-        leftFrontMotor.setPower(0);
-        leftRearMotor.setPower(0);
-        rightFrontMotor.setPower(0);
-        rightRearMotor.setPower(0);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
 
-        leftFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftRearMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightRearMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        // Turn on motor braking
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
 
@@ -74,10 +79,10 @@ public class DriveTrainHelper {
 
 
     public void drive(double left_front, double left_rear, double right_front, double right_rear) {
-        leftFrontMotor.setPower(rangeclip(left_front));
-        rightFrontMotor.setPower(rangeclip(right_front));
-        leftRearMotor.setPower(rangeclip(left_rear));
-        rightRearMotor.setPower(rangeclip(right_rear));
+        leftFront.setPower(rangeclip(left_front));
+        rightFront.setPower(rangeclip(right_front));
+        leftRear.setPower(rangeclip(left_rear));
+        rightRear.setPower(rangeclip(right_rear));
 
     }
 
@@ -120,40 +125,40 @@ public class DriveTrainHelper {
     }
 
     public void setRuntoPosition() {
-        leftFrontMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftRearMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightFrontMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightRearMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void setRunUsingEncoders() {
-        leftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftRearMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightRearMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void setRunWithoutEncoder() {
-        leftFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftRearMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightRearMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void stopAndResetEncoders() {
-        leftFrontMotor.setPower(0);
-        leftRearMotor.setPower(0);
-        rightRearMotor.setPower(0);
-        rightFrontMotor.setPower(0);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightRear.setPower(0);
+        rightFront.setPower(0);
 
-        leftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftRearMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightRearMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public boolean AreMotorsBusy() {
-        return (leftFrontMotor.isBusy() && leftRearMotor.isBusy() && rightFrontMotor.isBusy() && rightRearMotor.isBusy());
+        return (leftFront.isBusy() && leftRear.isBusy() && rightFront.isBusy() && rightRear.isBusy());
     }
 
     public void EncoderDrive(int distance) {
@@ -162,7 +167,7 @@ public class DriveTrainHelper {
 
         setRuntoPosition();
 
-        int startPosition = leftFrontMotor.getCurrentPosition();
+        int startPosition = leftFront.getCurrentPosition();
         int targetValue = startPosition + distance;
 
         double maxDistance = distance + 765;
@@ -172,21 +177,21 @@ public class DriveTrainHelper {
 
         double scalar = distSpeed / Math.pow(maxDistance, 2); //1/5100d for linear 4/83436125d for expon at max of 4085 or 1 / 18336125d for no reason
 
-        leftFrontMotor.setTargetPosition(targetValue);
-        leftRearMotor.setTargetPosition(targetValue);
-        rightFrontMotor.setTargetPosition(targetValue);
-        rightRearMotor.setTargetPosition(targetValue);
+        leftFront.setTargetPosition(targetValue);
+        leftRear.setTargetPosition(targetValue);
+        rightFront.setTargetPosition(targetValue);
+        rightRear.setTargetPosition(targetValue);
 
-        while (leftFrontMotor.isBusy()) {
+        while (leftFront.isBusy()) {
 
-            double distRemaining = targetValue - leftFrontMotor.getCurrentPosition();
+            double distRemaining = targetValue - leftFront.getCurrentPosition();
 
             double ex_Var_Speed = Math.abs(scalar * Math.pow(distRemaining, 2)) + minSpeed;
 
-            leftFrontMotor.setPower(ex_Var_Speed);
-            leftRearMotor.setPower(ex_Var_Speed);
-            rightRearMotor.setPower(ex_Var_Speed);
-            rightFrontMotor.setPower(ex_Var_Speed);
+            leftFront.setPower(ex_Var_Speed);
+            leftRear.setPower(ex_Var_Speed);
+            rightRear.setPower(ex_Var_Speed);
+            rightFront.setPower(ex_Var_Speed);
 
         }
 
