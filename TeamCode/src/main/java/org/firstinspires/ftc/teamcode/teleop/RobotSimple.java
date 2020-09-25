@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
-public class RobotTeleop {
+public class RobotSimple {
     /* Public OpMode members. */
     public DcMotor leftFront = null;
     public DcMotor leftRear = null;
@@ -20,7 +20,7 @@ public class RobotTeleop {
     private ElapsedTime period = new ElapsedTime();
 
     /* Constructor */
-    public RobotTeleop() {
+    public RobotSimple() {
 
     }
 

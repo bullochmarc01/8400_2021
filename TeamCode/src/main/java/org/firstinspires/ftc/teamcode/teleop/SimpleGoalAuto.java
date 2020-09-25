@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.auto.vision;
+package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -37,10 +37,11 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 @TeleOp
-public class EasyOpenCVExample extends LinearOpMode
+public class SimpleGoalAuto extends LinearOpMode
 {
     OpenCvInternalCamera phoneCam;
     SkystoneDeterminationPipeline pipeline;
+    RobotSimple robot = new RobotSimple();
 
     @Override
     public void runOpMode()
@@ -65,6 +66,8 @@ public class EasyOpenCVExample extends LinearOpMode
             }
         });
 
+        robot.init(hardwareMap);
+
         waitForStart();
 
         while (opModeIsActive())
@@ -72,6 +75,18 @@ public class EasyOpenCVExample extends LinearOpMode
             telemetry.addData("Analysis", pipeline.getAnalysis());
             telemetry.addData("Position", pipeline.position);
             telemetry.update();
+
+            if (pipeline.position == SkystoneDeterminationPipeline.RingPosition.FOUR){
+                robot.EncoderDrive(60);
+            }
+            else if (pipeline.position == SkystoneDeterminationPipeline.RingPosition.ONE){
+                robot.EncoderDrive(40);
+            }
+            else {
+                robot.EncoderDrive(20);
+            }
+
+            //TODO Add real Values
 
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
