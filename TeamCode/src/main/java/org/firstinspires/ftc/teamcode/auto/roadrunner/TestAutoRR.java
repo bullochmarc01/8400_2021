@@ -19,12 +19,13 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.teleop;
+package org.firstinspires.ftc.teamcode.auto.roadrunner;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.auto.roadrunner.drive.RobotRR;
+import org.firstinspires.ftc.teamcode.teleop.RobotSimple;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -38,13 +39,13 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 
-
 @Autonomous
-public class SimpleGoalAuto extends LinearOpMode
+public class TestAutoRR extends LinearOpMode
 {
     OpenCvInternalCamera phoneCam;
     SkystoneDeterminationPipeline pipeline;
-    RobotSimple robot = new RobotSimple();
+    RobotRR robot = new RobotRR(hardwareMap);
+
     public enum ScoringPosition {
         TOP,
         MIDDLE,
@@ -55,11 +56,13 @@ public class SimpleGoalAuto extends LinearOpMode
     @Override
     public void runOpMode()
     {
-
+        //init the phone camera and start vision pipeline
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
         pipeline = new SkystoneDeterminationPipeline();
         phoneCam.setPipeline(pipeline);
+
+
         ScoringPosition pos = ScoringPosition.TOP;
 
         // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
@@ -76,7 +79,6 @@ public class SimpleGoalAuto extends LinearOpMode
             }
         });
 
-        robot.init(hardwareMap);
 
         waitForStart();
 
@@ -105,22 +107,7 @@ public class SimpleGoalAuto extends LinearOpMode
             telemetry.update();
 
 
-            //Clean up vision values
-            if (pipeline.position == SkystoneDeterminationPipeline.RingPosition.FOUR){
 
-                pos = ScoringPosition.TOP;
-
-            }
-            else if (pipeline.position == SkystoneDeterminationPipeline.RingPosition.ONE){
-
-                pos = ScoringPosition.MIDDLE;
-
-            }
-            else {
-
-                pos = ScoringPosition.BOTTOM;
-
-            }
 
             //Follow correct path
 
@@ -165,7 +152,7 @@ public class SimpleGoalAuto extends LinearOpMode
 
 
 
-
+//Ring Detector
 
     public static class SkystoneDeterminationPipeline extends OpenCvPipeline
     {

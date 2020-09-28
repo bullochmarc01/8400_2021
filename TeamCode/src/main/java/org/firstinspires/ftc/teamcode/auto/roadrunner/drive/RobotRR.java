@@ -145,7 +145,7 @@ public class RobotRR extends MecanumDrive {
         // TODO: if desired, use setLocalizer() to change the localization method DONE
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
 
-        setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
+        setLocalizer(new Localizer(hardwareMap));
 
     }
 
