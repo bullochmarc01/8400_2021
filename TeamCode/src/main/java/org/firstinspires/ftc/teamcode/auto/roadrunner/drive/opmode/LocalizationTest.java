@@ -29,12 +29,12 @@ public class LocalizationTest extends LinearOpMode {
 
         RobotRR drive = new RobotRR(hardwareMap);
 
-        waitForStart();
+                    waitForStart();
 
-        while (!isStopRequested()) {
-            Pose2d baseVel = new Pose2d(
-                    -gamepad1.left_stick_y,
-                    -gamepad1.left_stick_x,
+            while (!isStopRequested()) {
+                Pose2d baseVel = new Pose2d(
+                        -gamepad1.left_stick_y,
+                        -gamepad1.left_stick_x,
                     -gamepad1.right_stick_x
             );
 

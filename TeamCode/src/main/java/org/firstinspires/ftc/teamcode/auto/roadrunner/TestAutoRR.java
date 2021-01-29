@@ -25,7 +25,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.auto.roadrunner.drive.RobotRR;
-import org.firstinspires.ftc.teamcode.teleop.RobotSimple;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;

@@ -122,6 +122,7 @@ public class RobotRR extends MecanumDrive {
         rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
+
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
         for (DcMotorEx motor : motors) {
@@ -145,7 +146,7 @@ public class RobotRR extends MecanumDrive {
         // TODO: if desired, use setLocalizer() to change the localization method DONE
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
 
-        setLocalizer(new Localizer(hardwareMap));
+        //setLocalizer(new Localizer(hardwareMap));
 
     }
 

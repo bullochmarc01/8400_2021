@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.auto.roadrunner.drive.RobotRR;
  */
 @Config
 @TeleOp(group = "drive")
-public class LocalizationTest extends LinearOpMode {
+public class teleop extends LinearOpMode {
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;
     public static double OMEGA_WEIGHT = 1;
@@ -34,7 +34,7 @@ public class LocalizationTest extends LinearOpMode {
             while (!isStopRequested()) {
                 Pose2d baseVel = new Pose2d(
                         -gamepad1.left_stick_y,
-                        -gamepad1.left_stick_x,
+                        gamepad1.left_stick_x,
                     -gamepad1.right_stick_x
             );
 
